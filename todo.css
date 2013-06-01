@@ -1,0 +1,26 @@
+body {
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+  text-align: center;
+}
+
+h1 {
+  padding: 2%;
+  font-size: 2em;
+}
+
+li:hover {
+  background-color: #f3f2ef;
+}
+
+.garbagesListElement {
+  border-bottom: 1px solid black;
+  padding: 0.5%;
+}
+
+.filter {
+  width: 60%;
+  margin-right: 20%;
+  margin-left: 20%;
+}

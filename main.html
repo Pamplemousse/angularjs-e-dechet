@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="project">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+    <script src="mongolab.js"></script>
+    <script src="todo.js"></script>
+    <link rel="stylesheet" href="../ressources/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../ressources/reset.css">
+    <link rel="stylesheet" href="todo.css">
+  </head>
+  <body ng-view>
+
+
+    <div ng-controller="ListCtrl">
+      
+      <h1>Accueil</h1>
+
+      <input class='filter' type="text" ng-model="search.name" placeholder="Recherche">
+
+      <ul>
+        <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage._id.$oid)">
+          {{garbage.name}}
+        </li>
+      </ul>
+
+      <button ng-click="test();">Test</button>
+
+    </div>
+
+  </body>
+</html>
