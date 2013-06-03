@@ -1,30 +1,13 @@
-angular.module('project', ['mongolab']).
-  config(function($routeProvider) {
-    $routeProvider.
-      when('/', {controller:ListCtrl, templateUrl:'main.html'}).
-      when('/garbage/:garbageId', {controller:GarbageCtrl, templateUrl:'garbage.html'}).
-      otherwise({redirectTo:'/'});
-  });
-
-
-function GarbageCtrl($scope, $location, $routeParams, Garbage) {
-  Garbage.get({id: $routeParams.garbageId}, function(garbage) {
-      self.original = garbage;
-      $scope.garbage = new Garbage(self.original);
-    });
-}
-
-
 function ListCtrl($scope, $location, Garbage) {
   $scope.$on('$viewContentLoaded', function() {
-                                      $("#e2").select2({
-                                          placeholder: "Select a State",
-                                          allowClear: true
-                                      });
-                                      $("#e2_2").select2({
-                                          placeholder: "Select a State"
-                                      });
-                                    });
+    $("#e2").select2({
+      placeholder: "Select a State",
+      allowClear: true
+    });
+    $("#e2_2").select2({
+      placeholder: "Select a State"
+    });
+  });
 
   $scope.garbages = Garbage.query();
 
@@ -41,27 +24,9 @@ function ListCtrl($scope, $location, Garbage) {
   }
 }
 
-
-  // $scope.garbages = [
-  //   {name:'pull en laine', category:{0:'paper', 1:'plastic', 2:'metal'}, room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name:'commode', category:'paper', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name:'batterie de telephone', category:['paper'], room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'assiette', category:'paper', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'verre a boire', category:'metal', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'canette de soda', category:'paper', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'sac plastique', category:'plastic', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'cafetiere', category:'plastic', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'magazine', category:'paper', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'pot de peinture', category:'metal', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'roue de velo', category:'plastic', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'bouteille de soda', category:'plastic', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'bouteille de lait ', category:'plastic', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'brique de lait', category:'metal', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'pot de yaourt', category:'paper', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'bouteille de shampoing', category:'metal', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'rasoir jetable', category:'plastic', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'bombe deodorant', category:'metal', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'deodorant en stick', category:'metal', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'barquette polystyrene', category:'plastic', room:'kitchen', description:'La description du dechet concerne etc...'},
-  //   {name: 'capsule de cafe', category:'metal', room:'kitchen', description:'La description du dechet concerne etc...'}
-  // ];
+function GarbageCtrl($scope, $location, $routeParams, Garbage) {
+  Garbage.get({id: $routeParams.garbageId}, function(garbage) {
+    self.original = garbage;
+    $scope.garbage = new Garbage(self.original);
+  });
+}
