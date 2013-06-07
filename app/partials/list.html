@@ -1,21 +1,13 @@
-      <select id="e2">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
-      </select>
+    <h1>Accueil</h1>
 
-      <select id="e2_2">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
-      </select>
+    <input class='filter' type="text" ng-model="search.name" placeholder="Recherche..." ng-change="changement()">
 
 
-      <h1>Accueil</h1>
+    <select id='e9' ng-model='selectedItem' multiple='' ng-options="category.name for category in categories"></select>
 
-      <input class='filter' type="text" ng-model="search.name" placeholder="Recherche">
-
-      <ul>
-        <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage._id.$oid)">
+    <ul>
+        <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage_id.$oid)">
           <div class="garbageName">{{garbage.name}}</div>
         </li>
-      </ul>
+    </ul>
 
