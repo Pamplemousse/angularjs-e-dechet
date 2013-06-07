@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('project', ['mongolab']).
+angular.module('project', ['filters','mongolab']).
   config(function($routeProvider) {
     $routeProvider.
       when('/', {controller:ListCtrl, templateUrl:'app/partials/list.html'}).

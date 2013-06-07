@@ -1,13 +1,27 @@
-    <h1>Accueil</h1>
+<!--
+<h1>Accueil</h1>
 
-    <input class='filter' type="text" ng-model="search.name" placeholder="Recherche..." ng-change="changement()">
+
+<select id='e9' ng-model='selectedItem' multiple='' ng-options="category.name for category in categories"></select>
+
+<input placeholder="Type to filter" ng-model="query">     
+
+<ul>
+  <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage_id.$oid)">
+  <div class="garbageName">{{garbage.name}}</div>
+  </li>
+</ul>
+  <li ng-repeat="friend in friends | friendFilter:searchCategories">
+  <span>{{friend.name}} @ {{friend.phone}}</span>
+-->
 
 
-    <select id='e9' ng-model='selectedItem' multiple='' ng-options="category.name for category in categories"></select>
 
-    <ul>
-        <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage_id.$oid)">
-          <div class="garbageName">{{garbage.name}}</div>
-        </li>
-    </ul>
+<input class='filter' type="text" ng-model="search.name" placeholder="Recherche..." ng-change="changement()">
 
+<select id='e9' ng-model='selectedItem' multiple='' ng-options="category.name for category in categories"></select>
+<ul>
+    <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | friendFilter:query"  ng-click="goTo(garbage_id.$oid)">
+  <div class="garbageName">{{garbage.name}}</div>
+  </li>
+</ul>
