@@ -2,12 +2,10 @@
 
     <input class='filter' type="text" ng-model="search.name" placeholder="Recherche..." ng-change="changement()">
 
-
     <select id='e9' ng-model='selectedItem' multiple='' ng-options="category.name for category in categories"></select>
 
     <ul>
-        <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage_id.$oid)">
+        <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage._id.$oid)"><!-- <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage_id.$oid)"> -->
           <div class="garbageName">{{garbage.name}}</div>
         </li>
     </ul>
-

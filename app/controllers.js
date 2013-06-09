@@ -6,18 +6,17 @@ function ListCtrl($scope, $location, Garbage) {
     $scope.categories = mock_categories;
     $("#e9").select2();
 
-
-
     $("#e9").on("change", function(e) {          
         // $("#e9").select2("val")
         var selectedCategories = $("#e9").select2("val");
-        $scope.search.categories = new Array();
+        $scope.selectedCategories = new Array();
+        // $scope.search.categories = new Array();
 
         for (key in selectedCategories) {
-          $scope.search.categories.push(mock_categories[selectedCategories[key]]);
+          $scope.selectedCategories.push(mock_categories[selectedCategories[key]]);
         }
 
-        console.log($scope.search.categories);
+        // console.log($scope.search.categories);
 
     });
 
@@ -27,7 +26,7 @@ function ListCtrl($scope, $location, Garbage) {
   $scope.garbages = Garbage.query();
 
   $scope.goTo = function(garbageId) {
-      $location.path('/garbage/'+garbageId);
+    $location.path('/garbage/'+garbageId);
   }
 
   $scope.testAjout = function() {
