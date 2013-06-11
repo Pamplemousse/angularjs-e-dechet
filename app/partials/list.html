@@ -1,13 +1,14 @@
 <h1>Accueil</h1>
 
+<div class="filters">
+    <select class='categoryFilter' ui-select2 id="e9" multiple='' ng-model='selectedCategories' ng-options="category.name for category in categories" ng-change="changeCategory()" placeholder="Catégorie..." ></select>
+    <input class='textualFilter search-query' type="text" ng-model="search.name" ng-change="changement()" placeholder="Recherche...">
+</div>
 
-<input class='filter' type="text" ng-model="search.name" placeholder="Recherche..." ng-change="changement()">
-
-<select ui-select2 id="e9" multiple='' ng-model='selectedCategories' ng-change="changeCategory()" ng-options="category.name for category in categories"></select>
-<ul>
+<ul class="unstyled">
     <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | categoryFilter:cleanSelectedCategories"  ng-click="goTo(garbage._id.$oid)">
-  <div class="garbageName">{{garbage.name}}</div>
-  </li>
+        <div class="garbageName">{{garbage.name}}</div>
+    </li>
 </ul>
 
 <!-- <button ng-click="testAjout()"> AJOUT DES DATAS </button> -->

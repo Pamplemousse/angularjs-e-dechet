@@ -23,8 +23,15 @@ li:hover {
   padding: 1%;
 }
 
-.filter {
+.filters {
+  width: 80%;
+  margin : 0% 10% 2% 10%;
+}
+
+.textualFilter {
   width: 60%;
-  margin-right: 20%;
-  margin-left: 20%;
+}
+
+.categoryFilter {
+  width: 30%;
 }
