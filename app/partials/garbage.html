@@ -7,3 +7,21 @@
 </div>
 
 <h3>{{garbage.description}}</h3>
+
+<!-- <div class="locationList">
+    <ul class="unstyled">
+    <li class="unstyled locationsListElement" ng-repeat="location in locations">
+        <div class="locationName">{{location.name}}</div>
+    </li>
+</ul>
+</div> -->
+
+<div class="locationsList">
+    <accordion close-others="oneAtATime" class="locationsList">
+        <accordion-group heading={{location.name}} ng-repeat="location in locations">
+            Contact  : 00 00 00 00 00<br/>
+            Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
+            Adresse  : {{location.address}}
+        </accordion-group>
+    </accordion>
+</div>
