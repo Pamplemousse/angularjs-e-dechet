@@ -46,6 +46,22 @@
       {
         "name" : "électrique",
         "value" : ""
+      },
+      {
+        "name" : "vaisselle",
+        "value" : ""
+      },
+      {
+        "name" : "automobile",
+        "value" : ""
+      },
+      {
+        "name" : "mobilier",
+        "value" : ""
+      },
+      {
+        "name" : "cosmétiques",
+        "value" : ""
       }
    ];
 
