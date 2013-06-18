@@ -1,5 +1,9 @@
 <h1>{{garbage.name}}</h1>
 
-<ul><li class="unstyled" ng-repeat="category in garbage.categories">{{category}}</li></ul>
+<div class="categoriesFromGarbageContainer">
+    <ul class="unstyled">
+        <li class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll" ng-repeat="category in garbage.categories">{{category}}</li>
+    </ul>
+</div>
 
 <h3>{{garbage.description}}</h3>

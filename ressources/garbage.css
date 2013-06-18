@@ -1,0 +1,25 @@
+.categoryFilter {
+  width: 30%;
+}
+
+.categoriesFromGarbageAll {
+  border: 1px solid black;
+  float: left;
+  display: block;
+  text-align: center;
+}
+
+.categoriesFromGarbage1 {
+  width: 46%;
+  margin: 0 27% 0 27%;
+}
+
+.categoriesFromGarbage2 {
+  width: 46%;
+  margin: 0 1% 0 1%;
+}
+
+.categoriesFromGarbage3 {
+  width: 31%;
+  margin: 0 1% 0 1%;
+}

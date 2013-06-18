@@ -1,16 +1,4 @@
-body {
-  width: 80%;
-  margin-right: 10%;
-  margin-left: 10%;
-}
-
-h1 {
-  padding: 2%;
-  font-size: 2em;
-  text-align: center;
-}
-
-li:hover {
+.garbagesListElement:hover {
   background-color: #f3f2ef;
 }
 
@@ -30,8 +18,4 @@ li:hover {
 
 .textualFilter {
   width: 60%;
-}
-
-.categoryFilter {
-  width: 30%;
 }
