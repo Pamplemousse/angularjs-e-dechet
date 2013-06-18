@@ -2,14 +2,15 @@ angular.module('utils', [])
 .factory('utils', function(){
   return{
     compareStrArray: function(categoriesArray, queryArray){
-    for (i in queryArray) {
-      for (j in categoriesArray) {
-        if (queryArray[i] == categoriesArray[j]) {
-            return true;
+      var compte = 0;
+      for (i in queryArray) {
+        for (j in categoriesArray) {
+          if (queryArray[i] == categoriesArray[j]) {
+            compte ++;
           }
         }
       } 
-      return false;
+      return (compte == queryArray.length);
     }
   };
 });
