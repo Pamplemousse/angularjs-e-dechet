@@ -1,12 +1,24 @@
 <h1>{{garbage.name}}</h1>
 
-<ul><li class="unstyled" ng-repeat="category in garbage.categories">{{category}}</li></ul>
+<div class="categoriesFromGarbageContainer">
+  <ul class="unstyled">
+    <li class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll label label-info" ng-repeat="category in garbage.categories">{{category}}</li>
+  </ul>
+</div>
 
 <h3>{{garbage.description}}</h3>
 
-<h1>Test map</h1>
-<div ng-app='project'>
-  <div ng-controller="GarbageCtrl">
+<div class="locationsList">
+  <accordion close-others="oneAtATime" class="locationsList">
+  <accordion-group heading={{location.name}} ng-repeat="location in locations">
+  Contact  : 00 00 00 00 00<br/>
+  Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
+  Adresse  : {{location.address}}
+  </accordion-group>
+  </accordion>
+</div>
+<div>
+  <div>
     <div id="map_canvas" ui-map="myMap" 
       style="height:300px;width:400px;border:2px solid #777777;margin:3px; border:1px solid" 
       ui-options="mapOptions" 
