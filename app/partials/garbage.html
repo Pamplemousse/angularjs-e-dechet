@@ -2,19 +2,12 @@
 
 <div class="categoriesFromGarbageContainer">
     <ul class="unstyled">
-        <li class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll" ng-repeat="category in garbage.categories">{{category}}</li>
+        <li class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll label label-info" ng-repeat="category in garbage.categories">{{category}}</li>
     </ul>
 </div>
 
 <h3>{{garbage.description}}</h3>
 
-<!-- <div class="locationList">
-    <ul class="unstyled">
-    <li class="unstyled locationsListElement" ng-repeat="location in locations">
-        <div class="locationName">{{location.name}}</div>
-    </li>
-</ul>
-</div> -->
 
 <div class="locationsList">
     <accordion close-others="oneAtATime" class="locationsList">
