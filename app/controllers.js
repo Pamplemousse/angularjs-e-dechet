@@ -6,10 +6,10 @@ function ListCtrl($scope, $location, Garbage) {
   $scope.garbages = Garbage.query();
 
   $scope.changeCategory = function() {
-        $scope.cleanSelectedCategories = new Array();
-        for (var key in $scope.selectedCategories) {
-          $scope.cleanSelectedCategories[key] = $scope.selectedCategories[key].name;
-        }
+    $scope.cleanSelectedCategories = new Array();
+    for (var key in $scope.selectedCategories) {
+      $scope.cleanSelectedCategories[key] = $scope.selectedCategories[key].name;
+    }
   }
 
   $scope.goTo = function(garbageId) {
@@ -22,7 +22,7 @@ function ListCtrl($scope, $location, Garbage) {
       Garbage.add(mock_dechets[i]);
     }
   }
-  
+
 }
 
 
@@ -60,4 +60,26 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage) {
 
 
   });
+  var ll = new google.maps.LatLng(13.0810, 80.2740);
+  $scope.mapOptions = {
+    center: ll,
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  //Markers should be added after map is loaded
+  $scope.onMapIdle = function() {
+    if ($scope.myMarkers === undefined){    
+      var marker = new google.maps.Marker({
+	map: $scope.myMap,
+	position: ll
+      });
+      $scope.myMarkers = [marker, ];
+    }
+  };
+
+  $scope.markerClicked = function(m) {
+    window.alert("clicked");
+  };
+
 }
