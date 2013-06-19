@@ -30,11 +30,6 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage) {
     self.original = garbage;
     $scope.garbage = new Garbage(self.original);
   });
-}
-
-
-
-function MapCtrl($scope) {
   var ll = new google.maps.LatLng(13.0810, 80.2740);
   $scope.mapOptions = {
     center: ll,
