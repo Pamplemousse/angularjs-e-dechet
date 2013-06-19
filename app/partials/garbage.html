@@ -8,26 +8,27 @@
 
 <h3>{{garbage.description}}</h3>
 
-<div class="locationsList">
+
+
+<div id="locationsList">
   <accordion close-others="oneAtATime" class="locationsList">
-  <accordion-group heading={{location.name}} ng-repeat="location in locations">
-  Contact  : 00 00 00 00 00<br/>
-  Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
-  Adresse  : {{location.address}}
-  </accordion-group>
+    <accordion-group heading={{location.name}} ng-repeat="location in locations">
+    Contact  : 00 00 00 00 00<br/>
+    Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
+    Adresse  : {{location.address}}
+    </accordion-group>
   </accordion>
 </div>
-<div>
-  <div>
-    <div id="map_canvas" ui-map="myMap" 
-      style="height:300px;width:400px;border:2px solid #777777;margin:3px; border:1px solid" 
-      ui-options="mapOptions" 
-      ui-event="{'map-idle' : 'onMapIdle()'}"
-      >
-    </div>
-    <!--In addition to creating the markers on the map, div elements with existing google.maps.Marker object should be created to hook up with events -->
-    <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
-      ui-event="{'map-click': 'markerClicked(marker)'}">
-    </div>
+
+
+<div id="map">
+  <div id="map_canvas" ui-map="myMap" 
+    ui-options="mapOptions" 
+    ui-event="{'map-idle' : 'onMapIdle()'}"
+    >
   </div>
+</div>
+<!--In addition to creating the markers on the map, div elements with existing google.maps.Marker object should be created to hook up with events -->
+<div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+  ui-event="{'map-click': 'markerClicked(marker)'}">
 </div>
