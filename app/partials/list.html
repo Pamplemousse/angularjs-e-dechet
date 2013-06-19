@@ -1,21 +1,14 @@
-      <select id="e2">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
-      </select>
+<h1>Accueil</h1>
 
-      <select id="e2_2">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
-      </select>
+<div class="filters">
+    <select class='categoryFilter' ui-select2 id="e9" multiple='' ng-model='selectedCategories' ng-options="category.name for category in categories" ng-change="changeCategory()" placeholder="Catégorie..." ></select>
+    <input class='textualFilter search-query' type="text" ng-model="search.name" ng-change="changement()" placeholder="Recherche...">
+</div>
 
+<ul class="unstyled">
+    <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | categoryFilter:cleanSelectedCategories" ng-click="goTo(garbage._id.$oid)">
+        <div class="garbageName">{{garbage.name}}</div>
+    </li>
+</ul>
 
-      <h1>Accueil</h1>
-
-      <input class='filter' type="text" ng-model="search.name" placeholder="Recherche">
-
-      <ul>
-        <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | orderBy:'name'" ng-click="goTo(garbage._id.$oid)">
-          <div class="garbageName">{{garbage.name}}</div>
-        </li>
-      </ul>
-
+<!-- <button ng-click="testAjout()"> AJOUT DES DATAS </button> -->
