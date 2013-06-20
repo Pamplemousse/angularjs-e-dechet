@@ -27,10 +27,11 @@ function ListCtrl($scope, $location, Garbage) {
 
 
 
-function GarbageCtrl($scope, $location, $routeParams, Garbage) {
+function GarbageCtrl($scope, $location, $routeParams, Garbage, utils) {
   Garbage.get({id: $routeParams.garbageId}, function(garbage) {
     self.original = garbage;
     $scope.garbage = new Garbage(self.original);
+    $scope.garbage.name = utils.toTitleCase($scope.garbage.name);
   });
 
   // On remplit à l'arrache les lieux susceptibles d'accueillir ce déchet (sans doublons)
@@ -47,7 +48,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage) {
     $scope.locations[i] = mock_locations[random[i]];
   }
   for (i in $scope.locations) {
-    $scope.locations[i].address = ($scope.locations[i].address == undefined || $scope.locations[i].address == '')? "Pas d'adresse enregistrée pour la : "+$scope.locations[i].name : $scope.locations[i].address;
+    $scope.locations[i].address = ($scope.locations[i].address == undefined || $scope.locations[i].address == '')? "Pas d'adresse enregistrée pour la "+$scope.locations[i].name : $scope.locations[i].address;
   }
 
   // Pour l'accordéon
@@ -83,8 +84,8 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage) {
     // }
   };
 
-  $scope.markerClicked = function(m) {
-    console.log(m);
+  $scope.markerClicked = function(index) {
+    $scope.locations[index].open = !$scope.locations[index].open;
   };
 
 }

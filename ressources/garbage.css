@@ -2,32 +2,50 @@
   width: 30%;
 }
 
-.categoriesFromGarbageAll {
-  float: left;
-  display: block;
+.categoriesFromGarbageContainer {
+  width: 100%;
   text-align: center;
+}
+
+.categoriesFromGarbageAll {
+ /* float: left;
+  display: block;*/
+  margin: 0 1% 0 1%;
 }
 
 .categoriesFromGarbage1 {
   width: 45%;
-  margin: 0 27% 0 27%;
 }
 
 .categoriesFromGarbage2 {
   width: 45%;
-  margin: 0 1% 0 1%;
 }
 
 .categoriesFromGarbage3 {
   width: 30%;
-  margin: 0 1% 0 1%;
 }
 
 .label-info {
   color: #333333;
+  background-color: #F5F5F5;
   font-size: 1em;
-  background-color: #E2E2E2;
+  font-weight:normal;
   padding: 5px 0;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  margin-top: 5%;
+}
+
+.accordion-heading {
+  background-color: #3A87AD;
+}
+
+.accordion-heading a {
+  color: #F5F5F5;
+  font-weight:Bold;
 }
 
 .accordion-toggle {
@@ -36,20 +54,18 @@
 
 #locationsList {
   width: 30%;
-  padding: 10% 1%;
+  padding-top: 5%;
   float: left;
 }
 
 #map {
   width: 60%;
   height: 50%;
-  padding: 5% 1%;
   float: right;
 }
 
 #map_canvas {
   width: 100%;
   height: 100%;
-  border-radius : 2%;
-  border: 3px solid #333333;
+  border-radius : 1%;
 }
