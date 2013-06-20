@@ -34,6 +34,35 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils) {
     $scope.garbage.name = utils.toTitleCase($scope.garbage.name);
   });
 
+  $scope.$on('$viewContentLoaded', function() {
+    console.log("content loaded");
+    navigator.geolocation.watchPosition(
+    // navigator.geolocation.getCurrentPosition(
+      function (position) {
+          console.log("position : ");
+          console.log(position);
+          // console.log(position.coords.latitude, position.coords.longitude);
+      }, 
+      function (error){
+          switch(error.code){
+              case error.TIMEOUT:
+                  console.log("Timeout");
+                  break;
+              case error.POSITION_UNAVAILABLE:
+                  console.log("Position unavailable");
+                  break;
+              case error.PERMISSION_DENIED:
+                  console.log("Permission denied");
+                  break;
+              case error.UNKNOWN_ERROR:
+                  console.log("Unknown error");
+                  break;
+              default: break;
+         }
+      },
+    );
+  });
+
   // On remplit à l'arrache les lieux susceptibles d'accueillir ce déchet (sans doublons)
   $scope.locations = new Array();
   var random = new Array();
