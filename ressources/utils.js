@@ -11,6 +11,10 @@ angular.module('utils', [])
         }
       }
       return (compte == queryArray.length);
+    },
+    toTitleCase: function (str) {
+        // return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
     }
   };
 });
