@@ -46,7 +46,6 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage) {
   for (var i=0 ; i<5 ; i++) {
     $scope.locations[i] = mock_locations[random[i]];
   }
-
   for (i in $scope.locations) {
     $scope.locations[i].address = ($scope.locations[i].address == undefined || $scope.locations[i].address == '')? "Pas d'adresse enregistrée pour la : "+$scope.locations[i].name : $scope.locations[i].address;
   }
@@ -65,17 +64,27 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage) {
 
   //Markers should be added after map is loaded
   $scope.onMapIdle = function() {
-    if ($scope.myMarkers === undefined){    
-      var marker = new google.maps.Marker({
-      	map: $scope.myMap,
-      	position: ll
+    // On sette les markers sur la carte
+    $scope.myMarkers = new Array();
+    for (i in $scope.locations) {
+      $scope.myMarkers[i] = new google.maps.Marker({
+        map: $scope.myMap,
+        position: new google.maps.LatLng($scope.locations[i].latitude, $scope.locations[i].longitude)
       });
-      $scope.myMarkers = [marker, ];
     }
+
+
+    // if ($scope.myMarkers === undefined){
+    //   var marker = new google.maps.Marker({
+    //   	map: $scope.myMap,
+    //   	position: ll
+    //   });
+      // $scope.myMarkers = [marker, ];
+    // }
   };
 
   $scope.markerClicked = function(m) {
-    window.alert("clicked");
+    console.log(m);
   };
 
 }
