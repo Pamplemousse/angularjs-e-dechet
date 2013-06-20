@@ -7,12 +7,12 @@
 </div>
 
 <div class="content">
-  <div id="locationsList">
+  <div id="locationsList" ng-click="accordionElementClicked()">
     <accordion close-others="oneAtATime" class="locationsList">
-      <accordion-group  heading={{location.name}} ng-repeat="location in locations" is-open="location.open">
-      Contact  : 00 00 00 00 00<br/>
-      Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
-      Adresse  : {{location.address}}
+      <accordion-group heading="{{location.name}}" ng-repeat="location in locations" is-open="location.open" ng-click="accordionElementClicked($index)">
+          Contact  : 00 00 00 00 00<br/>
+          Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
+          Adresse  : {{location.address}}
       </accordion-group>
     </accordion>
   </div>
@@ -25,8 +25,18 @@
       >
     </div>
   </div>
-  <!--In addition to creating the markers on the map, div elements with existing google.maps.Marker object should be created to hook up with events -->
+  <!--
+    In addition to creating the markers on the map, div elements with existing google.maps.Marker object should be created to hook up with events
+  -->
   <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
     ui-event="{'map-click': 'markerClicked($index)'}">
   </div>
+  <!--
+    Info Windows
+  -->
+  <div ng-repeat="marker in myMarkers" ui-map-info-window="myInfoWindows[$index]">
+      <h5>{{locations[$index].name}}</h5>
+      <h6>{{locations[$index].address}}</h6>
+  </div>
+
 </div>

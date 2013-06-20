@@ -49,6 +49,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils) {
   }
   for (i in $scope.locations) {
     $scope.locations[i].address = ($scope.locations[i].address == undefined || $scope.locations[i].address == '')? "Pas d'adresse enregistrée pour la "+$scope.locations[i].name : $scope.locations[i].address;
+    $scope.locations[i].open = false;
   }
 
   // Pour l'accordéon
@@ -56,36 +57,42 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils) {
 
 
   // Un point de la map arbitraire : la position de l'utilisateur
-  var ll = new google.maps.LatLng(44.966389, -0.883056);
   $scope.mapOptions = {
-    center: ll,
+    center: new google.maps.LatLng(44.966389, -0.883056),
     zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
   //Markers should be added after map is loaded
   $scope.onMapIdle = function() {
-    // On sette les markers sur la carte
+    // On sette les markers sur la carte, et on init les infos windows
     $scope.myMarkers = new Array();
+    $scope.myInfoWindows = new Array();
     for (i in $scope.locations) {
       $scope.myMarkers[i] = new google.maps.Marker({
         map: $scope.myMap,
         position: new google.maps.LatLng($scope.locations[i].latitude, $scope.locations[i].longitude)
       });
     }
-
-
-    // if ($scope.myMarkers === undefined){
-    //   var marker = new google.maps.Marker({
-    //   	map: $scope.myMap,
-    //   	position: ll
-    //   });
-      // $scope.myMarkers = [marker, ];
-    // }
   };
 
   $scope.markerClicked = function(index) {
     $scope.locations[index].open = !$scope.locations[index].open;
+    if ($scope.locations[index].open) {
+      $scope.myInfoWindows[index].open($scope.myMap, $scope.myMarkers[index]);
+    } else {
+      $scope.myInfoWindows[index].close();
+    }
+  };
+
+  $scope.accordionElementClicked = function() {
+    for (i in $scope.locations) {
+      if ($scope.locations[i].open) {
+        $scope.myInfoWindows[i].open($scope.myMap, $scope.myMarkers[i]);
+      } else {
+        $scope.myInfoWindows[i].close();
+      }
+    }
   };
 
 }
