@@ -6,9 +6,14 @@
   </ul>
 </div>
 
-<button type="button" class="btn" ng-model="isGeolocated" btn-checkbox ng-click="changeGeolocation()">
-    G
-</button>
+<label class="toggle well header-toggle">
+  <input ng-model="isGeolocated" type="checkbox" ng-click="changeGeolocation()">
+  <p>
+    <span>On</span>
+    <span>Off</span>
+  </p>
+  <a class="slide-button btn"></a>
+</label>
 
 <div class="content">
   <div id="locationsList" ng-click="accordionElementClicked()">

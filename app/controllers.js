@@ -74,7 +74,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
 
 
   $scope.changeGeolocation = function () {
-    if (!$scope.isGeolocated) {
+    if ($scope.isGeolocated) {
       // Si l'autoSet marche, on màj la position
       geolocation.autoSetUserLocation(function () {
         $scope.userLocation = geolocation.getUserLocation();
