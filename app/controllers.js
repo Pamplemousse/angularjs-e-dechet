@@ -54,37 +54,22 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
   // Pour l'accordéon
   $scope.oneAtATime = false;
 
-  // Un point de la map arbitraire : la position de l'utilisateur (si pas de position : centre de bordeaux !)
+  // Un point de la map arbitraire : la position de l'utilisateur
+  // La valeur par défaut
   $scope.userLocation = geolocation.getUserLocation();
+  // Si l'autoSet marche, on màj la position
+  geolocation.autoSetUserLocation(function () {
+    $scope.userLocation = geolocation.getUserLocation();
+    $scope.myMap.setCenter($scope.userLocation);
+  });
+
 
   $scope.mapOptions = {
     center: $scope.userLocation,
-    zoom: 10,
+    zoom: 8,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
-
-  $scope.changeGeolocation = function() {
-    if ($scope.isGeolocated) {
-        geolocation.autoSetUserLocation();
-    } else {
-      // On passe le centre de Bordeaux
-      geolocation.setUserLocation({
-        "latitude": 44.837912,
-        "longitude": -0.579541
-      });
-    }
-    $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
-    // $scope.myMarkers[$scope.myMarkers.length - 1] = new google.maps.Marker({
-    //   map: $scope.myMap,
-    //   position: geolocation.getUserLocation(),
-    //   icon: new google.maps.MarkerImage('http://www.vacancesetloisirs.com/site/gmap/markers/blue.png'),
-    //   tag: 'myPosition'
-    // });
-    // $scope.myInfoWindows[$scope.locations.length] = new google.maps.InfoWindow({
-    //   content: "<h4>Ma position</h4>"
-    // });
-  }
 
   //Markers should be added after map is loaded
   $scope.onMapIdle = function() {

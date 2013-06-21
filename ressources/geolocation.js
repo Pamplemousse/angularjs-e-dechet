@@ -10,10 +10,13 @@ angular.module('geolocation', [])
         setUserLocation: function(params) {
             userLocation = new google.maps.LatLng(params.latitude, params.longitude);
         },
-        autoSetUserLocation: function() {
+        autoSetUserLocation: function(callback) {
           navigator.geolocation.getCurrentPosition(
             function (position) {
               userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+              if (callback) {
+                callback();
+              }
             }, 
             function (error){
               switch(error.code){
