@@ -1,14 +1,16 @@
 angular.module('geolocation', [])
 .service('geolocation', function() {
     // Le centre de Bordeaux par défaut
-    var userLocation = new google.maps.LatLng(44, -0);
-    // var userLocation = new google.maps.LatLng(44.837912, -0.579541);
+    var userLocation;
     return {
         getUserLocation: function () {
             return userLocation;
         },
-        setUserLocation: function(params) {
+        setUserLocation: function(params, callback) {
             userLocation = new google.maps.LatLng(params.latitude, params.longitude);
+            if (callback) {
+              callback();
+            }
         },
         autoSetUserLocation: function(callback) {
           navigator.geolocation.getCurrentPosition(

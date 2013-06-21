@@ -56,20 +56,46 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
 
   // Un point de la map arbitraire : la position de l'utilisateur
   // La valeur par défaut
-  $scope.userLocation = geolocation.getUserLocation();
-  // Si l'autoSet marche, on màj la position
-  geolocation.autoSetUserLocation(function () {
-    $scope.userLocation = geolocation.getUserLocation();
-    $scope.myMap.setCenter($scope.userLocation);
-  });
+  geolocation.setUserLocation({
+      "latitude":44,
+      "longitude": -0
+    },
+    function () {
+      $scope.userLocation = geolocation.getUserLocation();
+    }
+  );
 
-
+  // Des options pour l'init de la map
   $scope.mapOptions = {
     center: $scope.userLocation,
     zoom: 8,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
+
+  $scope.changeGeolocation = function () {
+    if (!$scope.isGeolocated) {
+      // Si l'autoSet marche, on màj la position
+      geolocation.autoSetUserLocation(function () {
+        $scope.userLocation = geolocation.getUserLocation();
+        $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
+        $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
+        $scope.myMap.setCenter($scope.userLocation);
+      });
+    } else {
+      geolocation.setUserLocation({
+          "latitude":44,
+          "longitude": -0
+        },
+        function () {
+          $scope.userLocation = geolocation.getUserLocation();
+          $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
+          $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
+          $scope.myMap.setCenter($scope.userLocation);
+        }
+      );
+    }
+  }
 
   //Markers should be added after map is loaded
   $scope.onMapIdle = function() {
