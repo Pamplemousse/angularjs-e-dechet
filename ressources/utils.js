@@ -1,6 +1,6 @@
 angular.module('utils', [])
-.factory('utils', function(){
-  return{
+.factory('utils', function() {
+  return {
     compareStrArray: function (categoriesArray, queryArray) {
       var compte = 0;
       for (i in queryArray) {

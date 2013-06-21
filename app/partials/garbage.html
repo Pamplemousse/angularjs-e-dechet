@@ -1,10 +1,14 @@
-<h1>{{garbage.name}}</h1>
+<h1 class="garbageTitle">{{garbage.name}}</h1>
 
 <div class="categoriesFromGarbageContainer">
   <ul class="unstyled">
     <li class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll label label-info" ng-repeat="category in garbage.categories">{{category}}</li>
   </ul>
 </div>
+
+<button type="button" class="btn" ng-model="isGeolocated" btn-checkbox ng-click="changeGeolocation()">
+    G
+</button>
 
 <div class="content">
   <div id="locationsList" ng-click="accordionElementClicked()">

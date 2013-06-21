@@ -16,6 +16,14 @@
   margin : 0% 10% 2% 10%;
 }
 
+.categoryFilter {
+  width: 30%;
+}
+
 .textualFilter {
   width: 60%;
+}
+
+.locationFilter {
+    
 }

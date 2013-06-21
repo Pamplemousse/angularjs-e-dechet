@@ -1,4 +1,4 @@
-function ListCtrl($scope, $location, Garbage) {
+function ListCtrl($scope, $location, Garbage, geolocation) {
   $scope.$on('$viewContentLoaded', function() {
     $scope.categories = mock_categories;
   });
@@ -27,42 +27,12 @@ function ListCtrl($scope, $location, Garbage) {
 
 
 
-function GarbageCtrl($scope, $location, $routeParams, Garbage, utils) {
+function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocation) {
   Garbage.get({id: $routeParams.garbageId}, function(garbage) {
     self.original = garbage;
     $scope.garbage = new Garbage(self.original);
     $scope.garbage.name = utils.toTitleCase($scope.garbage.name);
   });
-
-  $scope.$on('$viewContentLoaded', function() {
-    console.log("content loaded");
-    navigator.geolocation.watchPosition(
-    // navigator.geolocation.getCurrentPosition(
-      function (position) {
-          console.log("position : ");
-          console.log(position);
-          // console.log(position.coords.latitude, position.coords.longitude);
-      }, 
-      function (error){
-          switch(error.code){
-              case error.TIMEOUT:
-                  console.log("Timeout");
-                  break;
-              case error.POSITION_UNAVAILABLE:
-                  console.log("Position unavailable");
-                  break;
-              case error.PERMISSION_DENIED:
-                  console.log("Permission denied");
-                  break;
-              case error.UNKNOWN_ERROR:
-                  console.log("Unknown error");
-                  break;
-              default: break;
-         }
-      },
-    );
-  });
-
   // On remplit à l'arrache les lieux susceptibles d'accueillir ce déchet (sans doublons)
   $scope.locations = new Array();
   var random = new Array();
@@ -84,13 +54,37 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils) {
   // Pour l'accordéon
   $scope.oneAtATime = false;
 
+  // Un point de la map arbitraire : la position de l'utilisateur (si pas de position : centre de bordeaux !)
+  $scope.userLocation = geolocation.getUserLocation();
 
-  // Un point de la map arbitraire : la position de l'utilisateur
   $scope.mapOptions = {
-    center: new google.maps.LatLng(44.966389, -0.883056),
+    center: $scope.userLocation,
     zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+
+
+  $scope.changeGeolocation = function() {
+    if ($scope.isGeolocated) {
+        geolocation.autoSetUserLocation();
+    } else {
+      // On passe le centre de Bordeaux
+      geolocation.setUserLocation({
+        "latitude": 44.837912,
+        "longitude": -0.579541
+      });
+    }
+    $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
+    // $scope.myMarkers[$scope.myMarkers.length - 1] = new google.maps.Marker({
+    //   map: $scope.myMap,
+    //   position: geolocation.getUserLocation(),
+    //   icon: new google.maps.MarkerImage('http://www.vacancesetloisirs.com/site/gmap/markers/blue.png'),
+    //   tag: 'myPosition'
+    // });
+    // $scope.myInfoWindows[$scope.locations.length] = new google.maps.InfoWindow({
+    //   content: "<h4>Ma position</h4>"
+    // });
+  }
 
   //Markers should be added after map is loaded
   $scope.onMapIdle = function() {
@@ -103,14 +97,29 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils) {
         position: new google.maps.LatLng($scope.locations[i].latitude, $scope.locations[i].longitude)
       });
     }
+    // Création du marker et de la window représentant la position de l'utilisateur
+    $scope.myMarkers[$scope.locations.length] = new google.maps.Marker({
+      map: $scope.myMap,
+      position: $scope.userLocation,
+      icon: new google.maps.MarkerImage('http://www.vacancesetloisirs.com/site/gmap/markers/blue.png'),
+      tag: 'myPosition'
+    });
+    $scope.myInfoWindows[$scope.locations.length] = new google.maps.InfoWindow({
+      content: "<h4>Ma position</h4>"
+    });
   };
 
   $scope.markerClicked = function(index) {
-    $scope.locations[index].open = !$scope.locations[index].open;
-    if ($scope.locations[index].open) {
-      $scope.myInfoWindows[index].open($scope.myMap, $scope.myMarkers[index]);
+    // Si ce n'est pas le marqueur de l'utilisateur qui a été cliqué
+    if (index != $scope.locations.length) {
+      $scope.locations[index].open = !$scope.locations[index].open;
+      if ($scope.locations[index].open) {
+        $scope.myInfoWindows[index].open($scope.myMap, $scope.myMarkers[index]);
+      } else {
+        $scope.myInfoWindows[index].close();
+      }
     } else {
-      $scope.myInfoWindows[index].close();
+      $scope.myInfoWindows[index].open($scope.myMap, $scope.myMarkers[index]);
     }
   };
 
