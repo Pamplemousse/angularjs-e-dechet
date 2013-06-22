@@ -33,23 +33,28 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
     $scope.garbage = new Garbage(self.original);
     $scope.garbage.name = utils.toTitleCase($scope.garbage.name);
   });
-  // On remplit à l'arrache les lieux susceptibles d'accueillir ce déchet (sans doublons)
-  $scope.locations = new Array();
-  var random = new Array();
-  for (var i=0 ; i<5 ; i++) {
-    var test = Math.floor(Math.random() * 42);
-    while ($.inArray(test, random) != -1){
-      test = Math.floor(Math.random() * 42);
+  
+  $scope.rdmLocations = function() {
+    $scope.locations = new Array();
+    var random = new Array();
+    for (var i=0 ; i<5 ; i++) {
+      var test = Math.floor(Math.random() * 42);
+      while ($.inArray(test, random) != -1){
+        test = Math.floor(Math.random() * 42);
+      }
+      random[i] = test;
     }
-    random[i] = test;
-  }
-  for (var i=0 ; i<5 ; i++) {
-    $scope.locations[i] = mock_locations[random[i]];
-  }
-  for (i in $scope.locations) {
-    $scope.locations[i].address = ($scope.locations[i].address == undefined || $scope.locations[i].address == '')? "Pas d'adresse enregistrée pour la "+$scope.locations[i].name : $scope.locations[i].address;
-    $scope.locations[i].open = false;
-  }
+    for (var i=0 ; i<5 ; i++) {
+      $scope.locations[i] = mock_locations[random[i]];
+    }
+    for (i in $scope.locations) {
+      $scope.locations[i].address = ($scope.locations[i].address == undefined || $scope.locations[i].address == '')? "Pas d'adresse enregistrée pour la "+$scope.locations[i].name : $scope.locations[i].address;
+      $scope.locations[i].open = false;
+    }
+  };
+
+  // On remplit à l'arrache les lieux susceptibles d'accueillir ce déchet (sans doublons)
+  $scope.rdmLocations();
 
   // Pour l'accordéon
   $scope.oneAtATime = false;
@@ -91,6 +96,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
           $scope.myMap.setCenter($scope.userLocation);
           $scope.isGeolocated.color = "success";
           $scope.isGeolocated.message = "Désactiver la géolocalisation";
+          $scope.rdmLocations();
         } else {
           $scope.isGeolocated.val = false;
           geolocation.setUserLocation({
@@ -120,6 +126,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
           $scope.myMap.setCenter($scope.userLocation);
           $scope.isGeolocated.color = "danger";
           $scope.isGeolocated.message = "Activer la géolocalisation";
+          $scope.rdmLocations();
         }
       );
     }
