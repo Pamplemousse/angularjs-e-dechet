@@ -23,16 +23,20 @@ angular.module('geolocation', [])
             function (error){
               switch(error.code){
                   case error.TIMEOUT:
-                      console.log("Timeout");
+                      alert("Géolocalisation : Timeout");
+                      callback(error);
                       break;
                   case error.POSITION_UNAVAILABLE:
-                      console.log("Position unavailable");
+                      alert("Géolocalisation : Position unavailable");
+                      callback(error);
                       break;
                   case error.PERMISSION_DENIED:
-                      console.log("Permission denied");
+                      alert("Géolocalisation : Permission denied");
+                      callback(error);
                       break;
                   case error.UNKNOWN_ERROR:
-                      console.log("Unknown error");
+                      alert("Géolocalisation : Unknown error");
+                      callback(error);
                       break;
                   default: break;
               }

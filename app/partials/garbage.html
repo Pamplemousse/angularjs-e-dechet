@@ -1,18 +1,18 @@
-<h1 class="garbageTitle">{{garbage.name}}</h1>
+<h1 class="title">{{garbage.name}}</h1>
 
 <div class="categoriesFromGarbageContainer">
   <ul class="unstyled">
-    <li class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll label label-info" ng-repeat="category in garbage.categories">{{category}}</li>
+    <li tooltip="Les catégories du déchet." tooltip-placement="right" class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll label label-info" ng-repeat="category in garbage.categories">{{category}}</li>
   </ul>
 </div>
 
-<label class="toggle well header-toggle">
-  <input ng-model="isGeolocated" type="checkbox" ng-click="changeGeolocation()">
+<label class="toggle well header-toggle" tooltip="{{isGeolocated.message}}" tooltip-placement="bottom">
+  <input ng-model="isGeolocated.val" type="checkbox" ng-click="changeGeolocation()">
   <p>
     <span>On</span>
     <span>Off</span>
   </p>
-  <a class="slide-button btn"></a>
+  <span class="slide-button btn btn-{{isGeolocated.color}}"></span>
 </label>
 
 <div class="content">

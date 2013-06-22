@@ -1,4 +1,4 @@
-<h1>Accueil</h1>
+<h1 class="title">E-Déchets</h1>
 
 <div class="filters">
     <select class='categoryFilter' ui-select2 id="e9" multiple='' ng-model='selectedCategories' ng-options="category.name for category in categories" ng-change="changeCategory()" placeholder="Catégorie..." ></select>
@@ -6,7 +6,7 @@
 </div>
 
 <ul class="unstyled">
-    <li class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | categoryFilter:cleanSelectedCategories" ng-click="goTo(garbage._id.$oid)">
+    <li tooltip="Clickez pour sélectionner !" tooltip-placement="right" class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | categoryFilter:cleanSelectedCategories" ng-click="goTo(garbage._id.$oid)">
         <div class="garbageName">{{garbage.name}}</div>
     </li>
 </ul>

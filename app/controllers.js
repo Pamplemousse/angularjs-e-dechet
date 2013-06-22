@@ -54,6 +54,13 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
   // Pour l'accordéon
   $scope.oneAtATime = false;
 
+  // $scope.tooltipMessageGeolocation = "Activer la géolocalisation";
+  $scope.isGeolocated = {
+    "val": false,
+    "color": "danger",
+    "message": "Activer la géolocalisation"
+  };
+
   // Un point de la map arbitraire : la position de l'utilisateur
   // La valeur par défaut
   geolocation.setUserLocation({
@@ -74,13 +81,32 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
 
 
   $scope.changeGeolocation = function () {
-    if ($scope.isGeolocated) {
+    if ($scope.isGeolocated.val) {
       // Si l'autoSet marche, on màj la position
-      geolocation.autoSetUserLocation(function () {
-        $scope.userLocation = geolocation.getUserLocation();
-        $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
-        $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
-        $scope.myMap.setCenter($scope.userLocation);
+      geolocation.autoSetUserLocation(function (error) {
+        if (!error) {
+          $scope.userLocation = geolocation.getUserLocation();
+          $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
+          $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
+          $scope.myMap.setCenter($scope.userLocation);
+          $scope.isGeolocated.color = "success";
+          $scope.isGeolocated.message = "Désactiver la géolocalisation";
+        } else {
+          $scope.isGeolocated.val = false;
+          geolocation.setUserLocation({
+              "latitude":44,
+              "longitude": -0
+            },
+            function () {
+              $scope.userLocation = geolocation.getUserLocation();
+              $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
+              $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
+              $scope.myMap.setCenter($scope.userLocation);
+              $scope.isGeolocated.color = "danger";
+              $scope.isGeolocated.message = "Activer la géolocalisation";
+            }
+          );
+        }
       });
     } else {
       geolocation.setUserLocation({
@@ -92,6 +118,8 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
           $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
           $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
           $scope.myMap.setCenter($scope.userLocation);
+          $scope.isGeolocated.color = "danger";
+          $scope.isGeolocated.message = "Activer la géolocalisation";
         }
       );
     }
