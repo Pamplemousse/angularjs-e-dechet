@@ -1,3 +1,7 @@
+.garbageCategories {
+  margin: 1% 0%;
+}
+
 .categoriesFromGarbageContainer {
   width: 100%;
   text-align: center;
@@ -19,6 +23,12 @@
   width: 30%;
 }
 
+.geolocationButton {
+  float: right;
+  margin: 1% 0%;
+
+}
+
 .label-info {
   color: #333333;
   background-color: #F5F5F5;
@@ -34,7 +44,6 @@
 .content {
   width: 100%;
   height: 100%;
-  margin-top: 5%;
 }
 
 .accordion-heading {
