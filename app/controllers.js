@@ -84,18 +84,22 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
+  $scope.updateUserLocation = function (isSuccess) {
+    $scope.userLocation = geolocation.getUserLocation();
+    $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
+    $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
+    $scope.myMap.setCenter($scope.userLocation);
+    $scope.isGeolocated.color = (isSuccess)? "success" : "danger";
+    $scope.isGeolocated.message = (isSuccess)? "Désactiver" : "Activer";
+    $scope.isGeolocated.message +=  "la géolocalisation";
+  }
 
   $scope.changeGeolocation = function () {
     if ($scope.isGeolocated.val) {
       // Si l'autoSet marche, on màj la position
       geolocation.autoSetUserLocation(function (error) {
         if (!error) {
-          $scope.userLocation = geolocation.getUserLocation();
-          $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
-          $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
-          $scope.myMap.setCenter($scope.userLocation);
-          $scope.isGeolocated.color = "success";
-          $scope.isGeolocated.message = "Désactiver la géolocalisation";
+          $scope.updateUserLocation(true);
           $scope.rdmLocations();
         } else {
           $scope.isGeolocated.val = false;
@@ -103,14 +107,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
               "latitude":44,
               "longitude": -0
             },
-            function () {
-              $scope.userLocation = geolocation.getUserLocation();
-              $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
-              $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
-              $scope.myMap.setCenter($scope.userLocation);
-              $scope.isGeolocated.color = "danger";
-              $scope.isGeolocated.message = "Activer la géolocalisation";
-            }
+            $scope.updateUserLocation(false)
           );
         }
       });
@@ -120,12 +117,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
           "longitude": -0
         },
         function () {
-          $scope.userLocation = geolocation.getUserLocation();
-          $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
-          $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
-          $scope.myMap.setCenter($scope.userLocation);
-          $scope.isGeolocated.color = "danger";
-          $scope.isGeolocated.message = "Activer la géolocalisation";
+          $scope.updateUserLocation(false);
           $scope.rdmLocations();
         }
       );
