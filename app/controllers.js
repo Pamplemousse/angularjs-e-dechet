@@ -56,10 +56,6 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
   // On remplit à l'arrache les lieux susceptibles d'accueillir ce déchet (sans doublons)
   $scope.rdmLocations();
 
-  // Pour l'accordéon
-  $scope.oneAtATime = false;
-
-  // $scope.tooltipMessageGeolocation = "Activer la géolocalisation";
   $scope.isGeolocated = {
     "val": false,
     "color": "danger",
@@ -67,12 +63,11 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
   };
 
   // Un point de la map arbitraire : la position de l'utilisateur
-  // La valeur par défaut
   geolocation.setUserLocation({
       "latitude":44,
       "longitude": -0
     },
-    function () {
+    function() {
       $scope.userLocation = geolocation.getUserLocation();
     }
   );
@@ -84,7 +79,7 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
-  $scope.updateUserLocation = function (isSuccess) {
+  $scope.updateUserLocation = function(isSuccess) {
     $scope.userLocation = geolocation.getUserLocation();
     $scope.myMarkers[$scope.myMarkers.length - 1].setMap(null);
     $scope.myMarkers[$scope.myMarkers.length - 1].setPosition($scope.userLocation);
@@ -94,21 +89,14 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
     $scope.isGeolocated.message +=  "la géolocalisation";
   }
 
-  $scope.changeGeolocation = function () {
+  $scope.changeGeolocation = function() {
     if ($scope.isGeolocated.val) {
       // Si l'autoSet marche, on màj la position
-      geolocation.autoSetUserLocation(function (error) {
+      geolocation.autoSetUserLocation(function(error) {
         if (!error) {
           $scope.updateUserLocation(true);
-          $scope.rdmLocations();
         } else {
-          $scope.isGeolocated.val = false;
-          geolocation.setUserLocation({
-              "latitude":44,
-              "longitude": -0
-            },
-            $scope.updateUserLocation(false)
-          );
+          $scope.openAddressForm();
         }
       });
     } else {
@@ -116,9 +104,8 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
           "latitude":44,
           "longitude": -0
         },
-        function () {
+        function() {
           $scope.updateUserLocation(false);
-          $scope.rdmLocations();
         }
       );
     }
@@ -169,6 +156,45 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
         $scope.myInfoWindows[i].close();
       }
     }
+  };
+
+
+
+
+  // Gestion de la fenêtre modale
+  $scope.openAddressForm = function () {
+    $scope.shouldBeOpen = true;
+  };
+
+  $scope.closeAddressForm = function(origin) {
+    if (origin == 'validate') {
+      $scope.geocoder = new google.maps.Geocoder();
+      $scope.geocoder.geocode( { 'address': $scope.address }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          $scope.isGeolocated.val = true;
+          console.log(results[0].geometry.location);
+          geolocation.setUserLocation({
+            "latitude": results[0].geometry.location.jb,
+            "longitude": results[0].geometry.location.kb
+            },
+            function() {
+              $scope.updateUserLocation(true);
+            }
+          );
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    } else {
+      console.log("test");
+      $scope.isGeolocated.val = false;
+    }
+    $scope.shouldBeOpen = false;
+  };
+
+  $scope.opts = {
+    backdropFade: true,
+    dialogFade:true
   };
 
 }

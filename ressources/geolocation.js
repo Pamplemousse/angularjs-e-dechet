@@ -23,22 +23,21 @@ angular.module('geolocation', [])
             function (error){
               switch(error.code){
                   case error.TIMEOUT:
-                      alert("Géolocalisation : Timeout");
-                      callback(error);
+                      // alert("Géolocalisation : Timeout");
                       break;
                   case error.POSITION_UNAVAILABLE:
-                      alert("Géolocalisation : Position unavailable");
-                      callback(error);
+                      // alert("Géolocalisation : Position unavailable");
                       break;
                   case error.PERMISSION_DENIED:
-                      alert("Géolocalisation : Permission denied");
-                      callback(error);
+                      // alert("Géolocalisation : Permission denied");
                       break;
                   case error.UNKNOWN_ERROR:
-                      alert("Géolocalisation : Unknown error");
-                      callback(error);
+                      // alert("Géolocalisation : Unknown error");
                       break;
                   default: break;
+              }
+              if (callback) {
+                callback(error);
               }
             }
           );

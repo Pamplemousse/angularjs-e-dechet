@@ -1,3 +1,18 @@
+<div modal="shouldBeOpen" options="opts">
+    <div class="modal-header">
+        <h3>Il semble compliqué de vous localiser.</h3>
+        <h5>Renseignez votre adresse pour améliorer le service.</h5>
+    </div>
+    <div class="modal-body">
+      <input class="searchAdress" type="text" ng-model="address" placeholder="Adresse...">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" ng-click="closeAddressForm('cancel')">Annuler</button>
+      <button class="btn btn-success" ng-click="closeAddressForm('validate')">Valider</button>
+    </div>
+</div>
+
+
 <h1 class="title">{{garbage.name}}</h1>
 
 <div class="categoriesFromGarbageContainer">
@@ -17,7 +32,7 @@
 
 <div class="content">
   <div id="locationsList" ng-click="accordionElementClicked()">
-    <accordion close-others="oneAtATime" class="locationsList">
+    <accordion close-others="false" class="locationsList">
       <accordion-group heading="{{location.name}}" ng-repeat="location in locations" is-open="location.open" ng-click="accordionElementClicked($index)">
           Contact  : 00 00 00 00 00<br/>
           Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
