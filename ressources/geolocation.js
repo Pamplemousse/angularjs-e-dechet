@@ -12,6 +12,13 @@ angular.module('geolocation', [])
               callback();
             }
         },
+        defaultSetUserLocation: function(callback) {
+          // Les coordonnées de Bordeaux
+          userLocation = new google.maps.LatLng(44.8386, -0.5783);
+          if (callback) {
+            callback();
+          }
+        },
         autoSetUserLocation: function(callback) {
           navigator.geolocation.getCurrentPosition(
             function (position) {
@@ -23,16 +30,16 @@ angular.module('geolocation', [])
             function (error){
               switch(error.code){
                   case error.TIMEOUT:
-                      // alert("Géolocalisation : Timeout");
+                      console.log("Géolocalisation : Timeout");
                       break;
                   case error.POSITION_UNAVAILABLE:
-                      // alert("Géolocalisation : Position unavailable");
+                      console.log("Géolocalisation : Position unavailable");
                       break;
                   case error.PERMISSION_DENIED:
-                      // alert("Géolocalisation : Permission denied");
+                      console.log("Géolocalisation : Permission denied");
                       break;
                   case error.UNKNOWN_ERROR:
-                      // alert("Géolocalisation : Unknown error");
+                      console.log("Géolocalisation : Unknown error");
                       break;
                   default: break;
               }

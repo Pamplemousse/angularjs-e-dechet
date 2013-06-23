@@ -63,14 +63,9 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
   };
 
   // Un point de la map arbitraire : la position de l'utilisateur
-  geolocation.setUserLocation({
-      "latitude":44,
-      "longitude": -0
-    },
-    function() {
-      $scope.userLocation = geolocation.getUserLocation();
-    }
-  );
+  geolocation.defaultSetUserLocation(function() {
+    $scope.userLocation = geolocation.getUserLocation();
+  });
 
   // Des options pour l'init de la map
   $scope.mapOptions = {
@@ -96,18 +91,13 @@ function GarbageCtrl($scope, $location, $routeParams, Garbage, utils, geolocatio
         if (!error) {
           $scope.updateUserLocation(true);
         } else {
-          $scope.openAddressForm();
+          $scope.openAddressForm(error);
         }
       });
     } else {
-      geolocation.setUserLocation({
-          "latitude":44,
-          "longitude": -0
-        },
-        function() {
-          $scope.updateUserLocation(false);
-        }
-      );
+      geolocation.defaultSetUserLocation(function() {
+        $scope.updateUserLocation(false);
+      });
     }
   }
 
