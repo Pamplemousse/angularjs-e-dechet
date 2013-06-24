@@ -29,15 +29,6 @@
   </ul>
 </div>
 
-<label class="toggle well header-toggle geolocationButton" tooltip="{{isGeolocated.message}}" tooltip-placement="right">
-  <input ng-model="isGeolocated.val" type="checkbox" ng-click="changeGeolocation()">
-  <p>
-    <span>On</span>
-    <span>Off</span>
-  </p>
-  <span class="slide-button btn btn-{{isGeolocated.color}}"></span>
-</label>
-
 
 
   </div>
@@ -49,6 +40,22 @@
 <div class="row-fluid">
   <div class="span4">
     <div class="content">
+  <div class="span6">
+Géolocalisation
+</div>
+  <div class="span6">
+<label class="toggle well header-toggle geolocationButton" tooltip="{{isGeolocated.message}}" tooltip-placement="right">
+  <input ng-model="isGeolocated.val" type="checkbox" ng-click="changeGeolocation()">
+  <p>
+    <span>On</span>
+    <span>Off</span>
+  </p>
+  <span class="slide-button btn btn-{{isGeolocated.color}}"></span>
+</label>
+</div>
+
+
+
       <div id="locationsList" ng-click="accordionElementClicked()">
 	<accordion close-others="oneAtATime" class="locationsList">
 	<accordion-group heading="{{location.name}}" ng-repeat="location in locations" is-open="location.open" ng-click="accordionElementClicked($index)">
