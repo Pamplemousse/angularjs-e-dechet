@@ -1,0 +1,93 @@
+<div class="row-fluid">
+  <div class="span12">
+
+<div modal="shouldBeOpen" options="opts">
+    <div class="modal-header">
+        <h3>Il semble compliqué de vous localiser.</h3>
+        <h5>Renseignez votre adresse pour améliorer le service.</h5>
+    </div>
+    <div class="modal-body">
+      <input class="searchAdress" type="text" ng-model="address" placeholder="Adresse...">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" ng-click="closeAddressForm('cancel')">Annuler</button>
+      <button class="btn btn-success" ng-click="closeAddressForm('validate')">Valider</button>
+    </div>
+</div>
+
+
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+
+<h1 class="title">{{garbage.name}}</h1>
+
+<div class="categoriesFromGarbageContainer">
+  <ul class="unstyled garbageCategories">
+    <li tooltip="Les catégories du déchet." tooltip-placement="right" class="unstyled categoriesFromGarbage{{garbage.categories.length}} categoriesFromGarbageAll label label-info" ng-repeat="category in garbage.categories">{{category}}</li>
+  </ul>
+</div>
+
+<label class="toggle well header-toggle geolocationButton" tooltip="{{isGeolocated.message}}" tooltip-placement="right">
+  <input ng-model="isGeolocated.val" type="checkbox" ng-click="changeGeolocation()">
+  <p>
+    <span>On</span>
+    <span>Off</span>
+  </p>
+  <span class="slide-button btn btn-{{isGeolocated.color}}"></span>
+</label>
+
+
+
+  </div>
+</div>
+
+
+<!-- ICI finir le merge -->
+
+<div class="row-fluid">
+  <div class="span4">
+    <div class="content">
+      <div id="locationsList" ng-click="accordionElementClicked()">
+	<accordion close-others="oneAtATime" class="locationsList">
+	<accordion-group heading="{{location.name}}" ng-repeat="location in locations" is-open="location.open" ng-click="accordionElementClicked($index)">
+	Contact  : 00 00 00 00 00<br/>
+	Horaires : Du lundi au vendredi, de 9h à 18h.<br/>
+	Adresse  : {{location.address}}
+	</accordion-group>
+	</accordion>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="span8">
+    <div class="content">
+    <div id="map">
+      <div id="map_canvas" ui-map="myMap" 
+	ui-options="mapOptions" 
+	ui-event="{'map-idle' : 'onMapIdle()'}"
+	>
+      </div>
+    </div>
+    <!--
+    In addition to creating the markers on the map, div elements with existing google.maps.Marker object should be created to hook up with events
+    -->
+    <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+      ui-event="{'map-click': 'markerClicked($index)'}">
+    </div>
+    <!--
+    Info Windows
+    -->
+    <div ng-repeat="marker in myMarkers" ui-map-info-window="myInfoWindows[$index]">
+      <h5>{{locations[$index].name}}</h5>
+      <h6>{{locations[$index].address}}</h6>
+  <p>et voilà</p>
+    </div>
+  </div>
+  </div>
+</div>
