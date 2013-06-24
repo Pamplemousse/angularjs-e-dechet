@@ -33,6 +33,25 @@ h1 {
 }
 
 .title_site {
-  size: 3px;
+  font-size: 55px;
   color: #fff;
+  margin: 15px;
+  display: block;
+  float: left;
+}
+
+.tagline {
+  font-size: 12px;
+  color: #def;
+  margin: 15px;
+  display: block;
+  float: left;
+  font-family: serif;
+}
+.tagline2 {
+  font-size: 10px;
+  color: #dde;
+  margin: 15px;
+  display: block;
+  font-family: serif;
 }

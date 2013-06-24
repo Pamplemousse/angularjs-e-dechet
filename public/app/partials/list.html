@@ -1,26 +1,28 @@
 <div class="row-fluid">
-  <div class="span6">
-    <h1>wheredrop</h1>
+  <div class="span3">
+    <select ui-select2 id="e9" multiple='' ng-model='selectedCategories' ng-options="category.name for category in categories" ng-change="changeCategory()" placeholder="Catégorie..." ></select>
   </div>
-  <div class="span6">
-    <center>
-      <span>
-	Avant de jeter au bord des eaux</br>
-	vous prendrez bien un wheredrop
-      </span>
-    </center>
-    <!--Body content-->
+  <div class="span9"> 
+
+    <div class="select2-container select2-container-multi ng-pristine ng-valid" style="width: 100%;">   
+
+
+
+    <ul class="select2-choices"> 
+      <li class="select2-search-field">    
+    <input class='search_input select2-input select2-default' type="text" ng-model="search.name" ng-change="changement()" placeholder="Recherche...">
+      </li>
+    </ul>
+  </div>
   </div>
 </div>
 <div class="row-fluid">
-  <div class="filters">
-    <select class='categoryFilter' ui-select2 id="e9" multiple='' ng-model='selectedCategories' ng-options="category.name for category in categories" ng-change="changeCategory()" placeholder="Catégorie..." ></select>
-    <input class='textualFilter search-query' type="text" ng-model="search.name" ng-change="changement()" placeholder="Recherche...">
+  <div class="span12">
+    <ul class="unstyled">
+      <li tooltip="Clickez pour sélectionner !" tooltip-placement="right" class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | categoryFilter:cleanSelectedCategories" ng-click="goTo(garbage._id.$oid)">
+      <div class="garbageName">{{garbage.name}}</div>
+      </li>
+    </ul>
+    <!-- <button ng-click="testAjout()"> AJOUT DES DATAS </button> -->
   </div>
-  <ul class="unstyled">
-    <li tooltip="Clickez pour sélectionner !" tooltip-placement="right" class="unstyled garbagesListElement" ng-repeat="garbage in garbages | filter:search | categoryFilter:cleanSelectedCategories" ng-click="goTo(garbage._id.$oid)">
-    <div class="garbageName">{{garbage.name}}</div>
-    </li>
-  </ul>
-  <!-- <button ng-click="testAjout()"> AJOUT DES DATAS </button> -->
 </div>

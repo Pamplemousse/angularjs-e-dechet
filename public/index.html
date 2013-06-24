@@ -5,7 +5,7 @@
       Wheredrop!?
     </title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">.
-    
+
     <script type="text/javascript" src="components/jquery/jquery.js"></script>
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/select2/select2.js"></script>
@@ -29,19 +29,52 @@
     <script src="app/controllers.js"></script>
 
 
-    <link rel="stylesheet" href="ressources/reset.css">
     <link rel="stylesheet" href="ressources/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="ressources/app.css">
-    <link rel="stylesheet" href="ressources/list.css">
-    <link rel="stylesheet" href="ressources/garbage.css">
-    <link rel="stylesheet" href="ressources/toggleSwitch.css">
+    <link rel="stylesheet" href="ressources/css/reset.css">
+    <link rel="stylesheet" href="ressources/css/app.css">
+    <link rel="stylesheet" href="ressources/css/list.css">
+    <link rel="stylesheet" href="ressources/css/garbage.css">
+    <link rel="stylesheet" href="ressources/css/toggleSwitch.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/select2/3.4.0/select2.css"/>
 
 
   </head>
   <body>
+
+
+
+
+
+    <div class="navbar navbar navbar-fixed-top">
+      <div class="bg-nav">
+	<div class="container">
+
+	      <span class='title_site'>
+	    Wheredrop
+	      </span>
+	    <center>
+
+	      <span class='tagline' >
+		"Avant de jeter au bord des eaux...
+		</br>
+		vous prendrez bien un wheredrop"
+	      </span>
+ <span class='tagline2' >
+		"Hackaton Bordeaux : projet E-déchets "
+	      </span>
+	  </div>
+
+	</div>
+      </div>
+    </div>
+
+
+
+
+
+
     <div class="container-fluid">
-        <div ng-view id="maxParent">
+      <div ng-view id="maxParent">
       </div>
     </div>  
   </body>

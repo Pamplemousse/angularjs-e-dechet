@@ -1,0 +1,32 @@
+.garbagesListElement:hover {
+  background-color: #f3f2ef;
+}
+
+.garbagesListElement {
+  border-bottom: 1px solid black;
+}
+
+.garbageName {
+  width: 80%;
+  padding: 1%;
+}
+
+
+.categoryFilter {
+  width: 35%;
+}
+
+
+.search_input {
+  width: 90%;
+  background: none repeat scroll 0 0 transparent !important;
+  border: 0 none;
+  box-shadow: none;
+  color: #666666;
+  font-family: sans-serif;
+  font-size: 100%;
+  margin: 1px 0;
+  outline: 0 none;
+  padding: 5px;
+
+}
